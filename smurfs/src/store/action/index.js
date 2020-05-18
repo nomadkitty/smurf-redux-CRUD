@@ -49,10 +49,23 @@ export const deleteSmurf = (id) => (dispatch) => {
   axios
     .delete(`${baseURL}/${id}`)
     .then((res) => {
-      console.log("delete smurf", res.data);
+      // console.log("delete smurf", res.data);
       dispatch({ type: DELETE_SMURF_SUCCESS, payload: res.data });
     })
     .catch((err) => {
       dispatch({ type: DELETE_SMURF_FAILURE, payload: err });
+    });
+};
+
+export const editSmurf = (id, changes) => (dispatch) => {
+  dispatch({ type: EDIT_SMURF_START });
+  axios
+    .put(`${baseURL}/${id}`, changes)
+    .then((res) => {
+      // console.log("edit smurf", res.data);
+      dispatch({ type: EDIT_SMURF_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: EDIT_SMURF_FAILURE, payload: err });
     });
 };
